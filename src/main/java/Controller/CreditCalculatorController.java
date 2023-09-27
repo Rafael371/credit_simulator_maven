@@ -1,13 +1,12 @@
-package org.example.Controller;
+package Controller;
 
-import org.example.Model.Kendaraan;
-import org.example.View.ConsoleView;
-
+import View.ConsoleView;
+import Model.Kendaraan;
 
 public class CreditCalculatorController {
     private ConsoleView view;
-    private double newVehicleDP = 0.25 ;
-    private double usedVehicleDP = 0.25 ;
+    private final double newVehicleDP = 0.25 ;
+    private final double usedVehicleDP = 0.25 ;
 
 
     public CreditCalculatorController(ConsoleView view) {
@@ -24,6 +23,8 @@ public class CreditCalculatorController {
     public double getUsedVehicleDP() {
         return usedVehicleDP;
     }
+
+
 
     public boolean validateDP(String condition, double pinjamanTotal, double dp){
         double percentageDP = dp/pinjamanTotal;
@@ -47,14 +48,14 @@ public class CreditCalculatorController {
         double monthlyInstallment;
         double yearlyInstallment=0;
 
-        double basePokokPinjaman = kendaraan.getTotalLoanAmount()- kendaraan.getDp();
-        double interestRate = (kendaraan.getType().equalsIgnoreCase("Motor")) ? motor_IR : mobil_IR;
+        double basePokokPinjaman = kendaraan.getJumlahPinjaman()- kendaraan.getJumlahDownPayment();
+        double interestRate = (kendaraan.getVehicleType().equalsIgnoreCase("Motor")) ? motor_IR : mobil_IR;
         double totalPinjaman = (basePokokPinjaman*interestRate)+basePokokPinjaman;
 
         double pokokPinjaman;
 
         view.displayTitle();
-        for (int year = 0; year < kendaraan.getTenor(); year++) {
+        for (int year = 0; year < kendaraan.getTenorCicilan(); year++) {
             if(year == 0) {
                 pokokPinjaman = basePokokPinjaman;
             }else{
@@ -63,7 +64,7 @@ public class CreditCalculatorController {
 
             totalPinjaman = (pokokPinjaman*interestRate)+pokokPinjaman;
 
-            monthlyInstallment = totalPinjaman / ((12*kendaraan.getTenor()) - year*12 );
+            monthlyInstallment = totalPinjaman / ((12*kendaraan.getTenorCicilan()) - year*12 );
 
             view.displayMonthlyInstallment((year+1), monthlyInstallment,interestRate);
 

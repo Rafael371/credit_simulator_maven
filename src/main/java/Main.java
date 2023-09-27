@@ -1,7 +1,5 @@
-package org.example;
-
-import org.example.View.ConsoleView;
-import org.example.Controller.CreditCalculatorController;
+import Controller.CreditCalculatorController;
+import View.ConsoleView;
 public class Main {
     public static void main(String[] args) {
         ConsoleView view = new ConsoleView();

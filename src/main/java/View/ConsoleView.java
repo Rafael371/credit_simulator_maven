@@ -1,12 +1,12 @@
-package org.example.View;;
+package View;
 import java.util.Scanner;
 import java.text.DecimalFormat;
-import org.example.Model.Kendaraan;
-import org.example.Controller.CreditCalculatorController;
+import Model.Kendaraan;
+import Controller.CreditCalculatorController;
 public class ConsoleView {
     private CreditCalculatorController controller = new CreditCalculatorController();
     private Scanner scanner = new Scanner(System.in);
-    private int currentYear = 2023;
+    private final int currentYear = 2023;
     private int batasTahun = currentYear-1;
     DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
     DecimalFormat decimalFormat2 = new DecimalFormat("#.###");
@@ -58,7 +58,6 @@ public class ConsoleView {
             downPayment= Integer.parseInt(scanner.nextLine());
             checkDP = controller.validateDP(vehicleCondition, totalLoanAmount, downPayment);
         }
-
 
         return new Kendaraan(vehicleCondition, vehicleType, vehicleYear, downPayment, totalLoanAmount, tenor);
     }
